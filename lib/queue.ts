@@ -1,6 +1,7 @@
 import { Queue, Worker, Job } from "bullmq"
 import { getRedisClient, connectRedis } from "@/lib/redis"
 import { prisma } from "@/lib/prisma"
+import { notifyWorkflowFailure } from "@/lib/notifications"
 
 export const WORKFLOW_QUEUE = "workflow-execution"
 export const RETRY_DELAY = 5000 // 5 seconds
@@ -117,8 +118,12 @@ export async function startWorkflowWorker() {
     console.log(`Job ${job.id} completed`)
   })
 
-  worker.on("failed", (job, err) => {
+  worker.on("failed", async (job, err) => {
     console.error(`Job ${job?.id} failed:`, err.message)
+    if (job?.data) {
+      const { runId, workflowId } = job.data as { runId: string; workflowId: string }
+      await notifyWorkflowFailure(runId, workflowId, err.message)
+    }
   })
 
   worker.on("error", (err) => {
