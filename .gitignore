@@ -11,7 +11,8 @@
 .env.production.local
 .env.*.local
 *.env
-.env.example
+# Allow .env.example as a template
+!.env.example
 config/
 secrets/
 *.key
