@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/auth/[...nextauth]/route"
+import { enqueueWorkflowRun } from "@/lib/queue"
 
 export async function POST(
   req: Request,
@@ -20,12 +21,18 @@ export async function POST(
     return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
 
+  if (!workflow.isActive) {
+    return NextResponse.json({ error: "Workflow is not active" }, { status: 400 })
+  }
+
   const run = await prisma.workflowRun.create({
     data: {
       workflowId: params.id,
       status: "PENDING",
     },
   })
+
+  await enqueueWorkflowRun(run.id, params.id)
 
   return NextResponse.json(run, { status: 201 })
 }
