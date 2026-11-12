@@ -1,0 +1,86 @@
+# =============================================================================
+# Business Automation Dashboard — .gitignore
+# Never commit secrets, dependencies, build outputs, or IDE files to GitHub.
+# =============================================================================
+
+# --- Environment / Secrets (NEVER commit real values) ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+*.env
+.env.example
+config/
+secrets/
+*.key
+*.pem
+*.p12
+*.jks
+
+# --- Node.js / Package managers ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --- Build outputs ---
+dist/
+dist-ssr/
+build/
+.next/
+out/
+*.local
+
+# --- TypeScript ---
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# --- Prisma (database tool) ---
+prisma/migrations/*.sql
+prisma/dev.db
+prisma/dev.db-journal
+*.sqlite
+*.sqlite3
+
+# --- IDE / Editors ---
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.code-workspace
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# --- Testing / Coverage ---
+coverage/
+.nyc_output/
+playwright-report/
+blob-report/
+test-results/
+cypress/videos/
+cypress/screenshots/
+
+# --- Docker ---
+.dockerignore
+.docker/
+
+# --- OS generated ---
+.envrc
+.direnv/
+
+# --- Misc ---
+*.tmp
+*.bak
+*.swp
+.vscode-test/
+
+# End of .gitignore
