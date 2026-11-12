@@ -451,19 +451,61 @@ Always reference the issue in the branch name and PR title, and close it with `C
 
 Map milestones to the project phases:
 
-| Milestone | Target | Issues included |
-|-----------|--------|-----------------|
-| `MVP v1.0 - Foundation` | Week 2 | Repo setup, auth, DB schema, CI/CD |
-| `MVP v1.0 - Core Dashboard` | Week 5 | KPI cards, workflow list, run history |
-| `MVP v1.0 - Workflow Builder` | Week 9 | Drag-and-drop canvas, node library, activation |
-| `MVP v1.0 - Automation Engine` | Week 12 | BullMQ workers, scheduler, retries, alerts |
-| `MVP v1.0 - Integrations & Launch` | Week 16 | OAuth, webhooks, audit log, beta deploy |
+| Milestone | Target | Issues | Status |
+|-----------|--------|--------|--------|
+| `MVP v1.0 - Foundation` | Week 2 | #1–#5 | 4/5 closed (#5 blocked: token lacks `workflow` scope) |
+| `MVP v1.0 - Core Dashboard` | Week 5 | #6–#8 | 3/3 closed |
+| `MVP v1.0 - Workflow Builder` | Week 9 | #9–#11 | 3/3 closed |
+| `MVP v1.0 - Automation Engine` | Week 12 | #12–#16 | 5/5 closed |
+| `MVP v1.0 - Integrations & Launch` | Week 16 | #17–#20 | 4/4 closed |
 
 **How to use milestones:**
 1. Create milestone in GitHub → set due date → add description.
 2. Assign every issue to a milestone.
 3. Track progress on the milestone page (GitHub shows % complete automatically).
 4. Close milestone when all issues are merged and release is tagged.
+
+---
+
+## 15. Final Project Status
+
+### ✅ All Issues Closed (19/20)
+
+| # | Title | PR | Status |
+|---|-------|-----|--------|
+| 1 | Initialize Git repo with dev as base branch | — | Closed |
+| 2 | Set up .gitignore and block secrets | — | Closed |
+| 3 | Configure NextAuth.js authentication | — | Closed |
+| 4 | Create Prisma database schema | — | Closed |
+| 5 | Set up GitHub Actions CI pipeline | — | **Blocked** (token scope) |
+| 6 | Build dashboard home page with KPI cards | — | Closed |
+| 7 | Create workflow list page | #21 | Closed |
+| 8 | Create workflow detail view | #22 | Closed |
+| 9 | Implement drag-and-drop workflow canvas | #23 | Closed |
+| 10 | Create node library documentation | #24 | Closed |
+| 11 | Add workflow validation before activation | #25 | Closed |
+| 12 | Set up BullMQ background job processor | #26 | Closed |
+| 13 | Implement cron-based scheduler | #27 | Closed |
+| 14 | Add retry logic with exponential backoff | — | Closed |
+| 15 | Create step-by-step execution logs | #28 | Closed |
+| 16 | Add failure alert notifications | #29 | Closed |
+| 17 | Add OAuth connectors (Google, Slack) | #30 | Closed |
+| 18 | Create webhook endpoint for external events | #31 | Closed |
+| 19 | Build audit log page | #32 | Closed |
+| 20 | Deploy to production and beta testing | #33 | Closed |
+
+### 🚧 Remaining Blocker
+
+**Issue #5 (CI Pipeline):** The GitHub token lacks `workflow` scope, preventing push of `.github/workflows/ci.yml`. A replacement PAT with `workflow` and `repo` scopes is needed to enable GitHub Actions CI/CD on pushes to `dev` and `main`.
+
+### 📦 Delivered Code
+
+- **Frontend:** Next.js 14 App Router, Tailwind CSS, React Flow canvas
+- **Backend:** NextAuth.js auth, Prisma + PostgreSQL, BullMQ + Redis workers
+- **API:** 12+ REST endpoints for workflows, runs, webhooks, notifications, audit logs
+- **Infrastructure:** Dockerfile, docker-compose.yml, DEPLOYMENT.md, branch protection
+- **Git:** `dev` base branch, protected `dev`/`main`, squash-merge PR workflow
+
 
 ---
 
